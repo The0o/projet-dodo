@@ -53,6 +53,11 @@ function movePlayer(direction) {
     playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
     camera.position.copy(playerPosition.clone().add(new THREE.Vector3(10, 10, 10)));
     camera.lookAt(playerPosition);
+
+    if (playerCube.position.equals(blueCube.position)) {
+        blueCubePosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
+        blueCube.position.copy(blueCubePosition);
+    }
 }
 
 document.addEventListener('keydown', (event) => {
