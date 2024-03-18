@@ -8,6 +8,31 @@
 <body style="margin: 0;">
     <p id="timer" style="position: absolute; color: white; font-size: 200%; margin: 10px 0 0 0; left: 10px;">0:30</p>
     <p id="score" style="position: absolute; color: white; font-size: 200%; margin: 10px 0 0 0; right: 10px;">0</p>
+    <div id="gameOver">
+        <input id="buttonRestart" type="button" value="Recommencer">
+    </div>
     <script src="./script.js" type="module"></script>
+    <script type="module">
+        import {restart} from "./script.js"
+        document.getElementById("buttonRestart").addEventListener("click", function() {
+            restart();
+        });
+    </script>
 </body>
+<style>
+#gameOver {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000000cc;
+}
+
+#buttonRestart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
 </html>

@@ -32,8 +32,21 @@ function updateTimer() {
     if (timer === 0) {
         clearInterval(timerInterval);
         gameEnded = true;
+        document.getElementById("gameOver").style.display = "block"
     }
     timer--;
+}
+
+export function restart() {
+    timer = 5
+    score = 0
+    document.getElementById("gameOver").style.display = "none"
+    document.getElementById("score").innerHTML = "0";
+    document.getElementById("timer").innerHTML = "0:30";
+    started = false;
+    gameEnded = false;
+    blueCubePosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
+    blueCube.position.copy(blueCubePosition);
 }
 
 const renderer = new THREE.WebGLRenderer();
