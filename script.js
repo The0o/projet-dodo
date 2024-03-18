@@ -6,6 +6,8 @@ const scene = new THREE.Scene();
 const width = window.innerWidth;
 const height = window.innerHeight;
 
+let score = 0;
+
 const size = 10;
 const aspectRatio = width / height;
 const camera = new THREE.OrthographicCamera(
@@ -57,6 +59,8 @@ function movePlayer(direction) {
     if (playerCube.position.equals(blueCube.position)) {
         blueCubePosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
         blueCube.position.copy(blueCubePosition);
+        score++;
+        document.getElementById("score").innerHTML = score;
     }
 }
 
