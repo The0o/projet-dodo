@@ -23,10 +23,10 @@ document.body.appendChild(renderer.domElement);
 
 let playerPosition = new THREE.Vector3(0, 0, 0);
 
-const planeGeometry = new THREE.PlaneGeometry(10, 10, 1, 1);
-const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
-const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-scene.add(plane);
+const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
+const playerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const playerCube = new THREE.Mesh(playerGeometry, playerMaterial);
+scene.add(playerCube);
 
 function movePlayer(direction) {
     switch (direction) {
