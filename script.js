@@ -7,6 +7,7 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 let score = 0;
+let bestScore = 0
 let started = false;
 let gameEnded = false;
 
@@ -32,6 +33,10 @@ function updateTimer() {
     if (timer === 0) {
         clearInterval(timerInterval);
         gameEnded = true;
+        if (score > bestScore) {
+            bestScore = score
+        }
+        document.getElementById("bestScore").innerHTML = "Votre meilleur score est de " + bestScore
         document.getElementById("gameOver").style.display = "block"
     }
     timer--;

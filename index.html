@@ -10,6 +10,7 @@
     <p id="score" style="position: absolute; color: white; font-size: 200%; margin: 10px 0 0 0; right: 10px;">0</p>
     <div id="gameOver">
         <input id="buttonRestart" type="button" value="Recommencer">
+        <p id="bestScore">Votre meilleur score est de</p>
     </div>
     <script src="./script.js" type="module"></script>
     <script type="module">
@@ -33,6 +34,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#bestScore {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
 }
 </style>
 </html>
