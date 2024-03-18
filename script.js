@@ -7,6 +7,8 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 let score = 0;
+let started = false;
+let gameEnded = false;
 
 const size = 10;
 const aspectRatio = width / height;
@@ -18,6 +20,21 @@ const camera = new THREE.OrthographicCamera(
     1,
     1000
 );
+
+let timer = 5;
+let timerInterval;
+
+function updateTimer() {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    document.getElementById("timer").innerHTML = formattedTime;
+    if (timer === 0) {
+        clearInterval(timerInterval);
+        gameEnded = true;
+    }
+    timer--;
+}
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
@@ -65,19 +82,45 @@ function movePlayer(direction) {
 }
 
 document.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        case 'ArrowUp':
-            movePlayer('up');
-            break;
-        case 'ArrowDown':
-            movePlayer('down');
-            break;
-        case 'ArrowLeft':
-            movePlayer('left');
-            break;
-        case 'ArrowRight':
-            movePlayer('right');
-            break;
+    if (!gameEnded) {
+        switch (event.key) {
+            case 'ArrowUp':
+                if (!started) {
+                    started = true;
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                    }, 1000);
+                }
+                movePlayer('up');
+                break;
+            case 'ArrowDown':
+                if (!started) {
+                    started = true;
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                    }, 1000);
+                }
+                movePlayer('down');
+                break;
+            case 'ArrowLeft':
+                if (!started) {
+                    started = true;
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                    }, 1000);
+                }
+                movePlayer('left');
+                break;
+            case 'ArrowRight':
+                if (!started) {
+                    started = true;
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                    }, 1000);
+                }
+                movePlayer('right');
+                break;
+        }
     }
 });
 
