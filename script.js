@@ -22,11 +22,18 @@ renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
 let playerPosition = new THREE.Vector3(0, 0, 0);
+let blueCubePosition = new THREE.Vector3(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
 
 const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
 const playerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const playerCube = new THREE.Mesh(playerGeometry, playerMaterial);
 scene.add(playerCube);
+
+const blueCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+const blueCubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+const blueCube = new THREE.Mesh(blueCubeGeometry, blueCubeMaterial);
+blueCube.position.copy(blueCubePosition);
+scene.add(blueCube);
 
 function movePlayer(direction) {
     switch (direction) {
@@ -43,6 +50,7 @@ function movePlayer(direction) {
             playerPosition.x += 1;
             break;
     }
+    playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
     camera.position.copy(playerPosition.clone().add(new THREE.Vector3(10, 10, 10)));
     camera.lookAt(playerPosition);
 }
