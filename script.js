@@ -76,16 +76,16 @@ scene.add(blueCube);
 function movePlayer(direction) {
     switch (direction) {
         case 'up':
-            playerPosition.z -= 1;
-            break;
-        case 'down':
             playerPosition.z += 1;
             break;
+        case 'down':
+            playerPosition.z -= 1;
+            break;
         case 'left':
-            playerPosition.x -= 1;
+            playerPosition.x += 1;
             break;
         case 'right':
-            playerPosition.x += 1;
+            playerPosition.x -= 1;
             break;
     }
     playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
