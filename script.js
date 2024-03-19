@@ -61,31 +61,43 @@ document.body.appendChild(renderer.domElement);
 let playerPosition = new THREE.Vector3(0, 0, 0);
 let blueCubePosition = new THREE.Vector3(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
 
-var map = new THREE.TextureLoader().load( "lit.png" );
+var map = new THREE.TextureLoader().load( "image/lit.png" );
 var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
 var playerCube = new THREE.Sprite( material );
 playerCube.scale.set(2, 2, 1);
 scene.add( playerCube );
 
-const blueCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+/*const blueCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
 const blueCubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 const blueCube = new THREE.Mesh(blueCubeGeometry, blueCubeMaterial);
-blueCube.position.copy(blueCubePosition);
+blueCube.position.copy(blueCubePosition);*/
+var up = new THREE.TextureLoader().load( "image/up.png" );
+var down = new THREE.TextureLoader().load( "image/down.png" );
+var left = new THREE.TextureLoader().load( "image/left.png" );
+var right = new THREE.TextureLoader().load( "image/right.png" );
+var map = new THREE.TextureLoader().load( "image/right.png" );
+var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+var blueCube = new THREE.Sprite( material );
+blueCube.scale.set(1.2, 1.2, 1);
 scene.add(blueCube);
 
 function movePlayer(direction) {
     switch (direction) {
         case 'up':
             playerPosition.z += 1;
+            blueCube.material.map = up;
             break;
         case 'down':
             playerPosition.z -= 1;
+            blueCube.material.map = down;
             break;
         case 'left':
             playerPosition.x += 1;
+            blueCube.material.map = left;
             break;
         case 'right':
             playerPosition.x -= 1;
+            blueCube.material.map = right;
             break;
     }
     playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
