@@ -78,7 +78,7 @@ character.scale.set(1.2, 1.2, 1);
 scene.add(character);
 
 function movePlayer(direction) {
-    var currentURL = window.location.href;
+    var currentURL = window.location.href.replace('index.html', '');
     var absoluteURL = character.material.map.image.currentSrc;
     var relativeURL = absoluteURL.replace(currentURL, '');
     switch (direction) {
