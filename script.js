@@ -22,7 +22,7 @@ const camera = new THREE.OrthographicCamera(
     1000
 );
 
-let timer = 5;
+let timer = 30;
 let timerInterval;
 
 function updateTimer() {
