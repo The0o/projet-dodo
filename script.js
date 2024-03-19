@@ -61,10 +61,11 @@ document.body.appendChild(renderer.domElement);
 let playerPosition = new THREE.Vector3(0, 0, 0);
 let blueCubePosition = new THREE.Vector3(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
 
-const playerGeometry = new THREE.BoxGeometry(1, 1, 1);
-const playerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const playerCube = new THREE.Mesh(playerGeometry, playerMaterial);
-scene.add(playerCube);
+var map = new THREE.TextureLoader().load( "lit.png" );
+var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+var playerCube = new THREE.Sprite( material );
+playerCube.scale.set(2, 2, 1);
+scene.add( playerCube );
 
 const blueCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
 const blueCubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
