@@ -82,22 +82,33 @@ blueCube.scale.set(1.2, 1.2, 1);
 scene.add(blueCube);
 
 function movePlayer(direction) {
+    var currentURL = window.location.href;
+    var absoluteURL = blueCube.material.map.image.currentSrc;
+    var relativeURL = absoluteURL.replace(currentURL, '');
     switch (direction) {
         case 'up':
             playerPosition.z += 1;
-            blueCube.material.map = up;
+            if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
+                blueCube.material.map = up;
+            }
             break;
         case 'down':
             playerPosition.z -= 1;
-            blueCube.material.map = down;
+            if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
+                blueCube.material.map = down;
+            }
             break;
         case 'left':
             playerPosition.x += 1;
-            blueCube.material.map = left;
+            if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
+                blueCube.material.map = left;
+            }
             break;
         case 'right':
             playerPosition.x -= 1;
-            blueCube.material.map = right;
+            if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
+                blueCube.material.map = right;
+            }
             break;
     }
     playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
@@ -153,6 +164,32 @@ document.addEventListener('keydown', (event) => {
                 break;
         }
     }
+});
+
+var samuel = new THREE.TextureLoader().load("image/secret/samuel.jpg");
+var theo = new THREE.TextureLoader().load("image/up.png");
+
+function changeBlueCubeTextureBySpecial(word) {
+    var texture = specialTextures[word.toLowerCase()];
+    if (texture) {
+        blueCube.material.map = texture;
+    }
+}
+
+var specialTextures = {
+    'samuel': samuel,
+    'theo': theo
+};
+
+document.addEventListener('keydown', (event) => {
+    var typedText = '';
+    document.addEventListener('keydown', function keyListener(e) {
+        typedText += e.key.toLowerCase();
+        if (specialTextures[typedText]) {
+            changeBlueCubeTextureBySpecial(typedText);
+            typedText = '';
+        }
+    });
 });
 
 function animate() {
