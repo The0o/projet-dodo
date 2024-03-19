@@ -43,15 +43,15 @@ function updateTimer() {
 }
 
 export function restart() {
-    timer = 5
+    timer = 30
     score = 0
     document.getElementById("gameOver").style.display = "none"
     document.getElementById("score").innerHTML = "0";
     document.getElementById("timer").innerHTML = "0:30";
     started = false;
     gameEnded = false;
-    blueCubePosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
-    blueCube.position.copy(blueCubePosition);
+    characterPosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
+    character.position.copy(characterPosition);
 }
 
 const renderer = new THREE.WebGLRenderer();
@@ -59,65 +59,61 @@ renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
 let playerPosition = new THREE.Vector3(0, 0, 0);
-let blueCubePosition = new THREE.Vector3(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
+let characterPosition = new THREE.Vector3(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
 
-var map = new THREE.TextureLoader().load( "image/lit.png" );
-var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
-var playerCube = new THREE.Sprite( material );
-playerCube.scale.set(2, 2, 1);
-scene.add( playerCube );
+var map = new THREE.TextureLoader().load("image/lit.png");
+var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
+var lit = new THREE.Sprite(material);
+lit.scale.set(2, 2, 1);
+scene.add(lit);
 
-/*const blueCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-const blueCubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-const blueCube = new THREE.Mesh(blueCubeGeometry, blueCubeMaterial);
-blueCube.position.copy(blueCubePosition);*/
 var up = new THREE.TextureLoader().load( "image/up.png" );
 var down = new THREE.TextureLoader().load( "image/down.png" );
 var left = new THREE.TextureLoader().load( "image/left.png" );
 var right = new THREE.TextureLoader().load( "image/right.png" );
 var map = new THREE.TextureLoader().load( "image/right.png" );
 var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
-var blueCube = new THREE.Sprite( material );
-blueCube.scale.set(1.2, 1.2, 1);
-scene.add(blueCube);
+var character = new THREE.Sprite( material );
+character.scale.set(1.2, 1.2, 1);
+scene.add(character);
 
 function movePlayer(direction) {
     var currentURL = window.location.href;
-    var absoluteURL = blueCube.material.map.image.currentSrc;
+    var absoluteURL = character.material.map.image.currentSrc;
     var relativeURL = absoluteURL.replace(currentURL, '');
     switch (direction) {
         case 'up':
             playerPosition.z += 1;
             if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
-                blueCube.material.map = up;
+                character.material.map = up;
             }
             break;
         case 'down':
             playerPosition.z -= 1;
             if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
-                blueCube.material.map = down;
+                character.material.map = down;
             }
             break;
         case 'left':
             playerPosition.x += 1;
             if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
-                blueCube.material.map = left;
+                character.material.map = left;
             }
             break;
         case 'right':
             playerPosition.x -= 1;
             if (["image/up.png", "image/down.png", "image/right.png", "image/left.png"].includes(relativeURL)) {
-                blueCube.material.map = right;
+                character.material.map = right;
             }
             break;
     }
-    playerCube.position.copy(playerPosition); // Mettre à jour la position du cube rouge
+    lit.position.copy(playerPosition);
     camera.position.copy(playerPosition.clone().add(new THREE.Vector3(10, 10, 10)));
     camera.lookAt(playerPosition);
 
-    if (playerCube.position.equals(blueCube.position)) {
-        blueCubePosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
-        blueCube.position.copy(blueCubePosition);
+    if (lit.position.equals(character.position)) {
+        characterPosition.set(Math.floor(Math.random() * size), 0, Math.floor(Math.random() * size));
+        character.position.copy(characterPosition);
         score++;
         document.getElementById("score").innerHTML = score;
     }
@@ -176,15 +172,15 @@ var kevin = new THREE.TextureLoader().load("image/secret/kevin.jpg");
 var nathan = new THREE.TextureLoader().load("image/secret/nathan.jpg");
 var theo = new THREE.TextureLoader().load("image/up.png");
 
-function changeBlueCubeTextureBySpecial(word) {
+function changeCharacterTextureBySpecial(word) {
     var texture = specialTextures[word.toLowerCase()];
     if (texture) {
-        blueCube.material.map = texture;
+        character.material.map = texture;
         if (word.toLowerCase() !== 'theo') {
-            blueCube.scale.set(2, 2, 1);
+            character.scale.set(2, 2, 1);
         }
         else {
-            blueCube.scale.set(1.2, 1.2, 1);
+            character.scale.set(1.2, 1.2, 1);
         }
     }
 }
@@ -206,7 +202,7 @@ document.addEventListener('keydown', (event) => {
     document.addEventListener('keydown', function keyListener(e) {
         typedText += e.key.toLowerCase();
         if (specialTextures[typedText]) {
-            changeBlueCubeTextureBySpecial(typedText);
+            changeCharacterTextureBySpecial(typedText);
             typedText = '';
         }
     });
