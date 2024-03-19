@@ -167,18 +167,38 @@ document.addEventListener('keydown', (event) => {
 });
 
 var samuel = new THREE.TextureLoader().load("image/secret/samuel.jpg");
+var benji = new THREE.TextureLoader().load("image/secret/benji.jpg");
+var candice = new THREE.TextureLoader().load("image/secret/candice.jpg");
+var chloe = new THREE.TextureLoader().load("image/secret/chloe.png");
+var clemence = new THREE.TextureLoader().load("image/secret/clemence.jpg");
+var julien = new THREE.TextureLoader().load("image/secret/julien.jpg");
+var kevin = new THREE.TextureLoader().load("image/secret/kevin.jpg");
+var nathan = new THREE.TextureLoader().load("image/secret/nathan.jpg");
 var theo = new THREE.TextureLoader().load("image/up.png");
 
 function changeBlueCubeTextureBySpecial(word) {
     var texture = specialTextures[word.toLowerCase()];
     if (texture) {
         blueCube.material.map = texture;
+        if (word.toLowerCase() !== 'theo') {
+            blueCube.scale.set(2, 2, 1);
+        }
+        else {
+            blueCube.scale.set(1.2, 1.2, 1);
+        }
     }
 }
 
 var specialTextures = {
     'samuel': samuel,
-    'theo': theo
+    'theo': theo,
+    'benji': benji,
+    'candice': candice,
+    'chloe': chloe,
+    'clemence': clemence,
+    'julien': julien,
+    'kevin': kevin,
+    'nathan': nathan,
 };
 
 document.addEventListener('keydown', (event) => {
