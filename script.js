@@ -170,6 +170,7 @@ var clemence = new THREE.TextureLoader().load("image/secret/clemence.jpg");
 var julien = new THREE.TextureLoader().load("image/secret/julien.jpg");
 var kevin = new THREE.TextureLoader().load("image/secret/kevin.jpg");
 var nathan = new THREE.TextureLoader().load("image/secret/nathan.jpg");
+var maelle = new THREE.TextureLoader().load("image/secret/maelle.jpg");
 var theo = new THREE.TextureLoader().load("image/up.png");
 
 function changeCharacterTextureBySpecial(word) {
@@ -195,6 +196,7 @@ var specialTextures = {
     'julien': julien,
     'kevin': kevin,
     'nathan': nathan,
+    'maelle': maelle,
 };
 
 document.addEventListener('keydown', (event) => {
